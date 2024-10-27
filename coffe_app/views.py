@@ -21,3 +21,12 @@ def menu_view(request):
 
 def contact_view(request):
     return render(request, 'coffe_shop/contact.html')
+
+
+def reservation_view(request):
+    return render(request, 'coffe_shop/reservation.html')
+
+
+def testimonial_view(request):
+    return render(request, 'coffe_shop/testimonial.html')
+
