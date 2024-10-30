@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from .models import Menu, Category
 
 
 # Create your views here.
@@ -16,7 +17,9 @@ def service_view(request):
 
 
 def menu_view(request):
-    return render(request, 'coffe_shop/menu.html')
+    menus = Menu.objects.filter(status=True)
+    context = {'menus': menus}
+    return render(request, 'coffe_shop/menu.html', context)
 
 
 def contact_view(request):
