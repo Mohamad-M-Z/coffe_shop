@@ -1,7 +1,8 @@
 from django.shortcuts import render
+from django.http import HttpResponseRedirect
 from .models import Menu, Category, Contact
 from django.contrib import messages
-from .form import ContactForm
+from .form import ContactForm, NewsletterForm
 
 
 
@@ -46,4 +47,14 @@ def reservation_view(request):
 
 def testimonial_view(request):
     return render(request, 'coffe_shop/testimonial.html')
+
+
+def newsletter_view(request):
+    if request.method == 'POST':
+        form = NewsletterForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect('/')
+        else:
+            return HttpResponseRdirect('/')
 
