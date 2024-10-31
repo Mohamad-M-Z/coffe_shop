@@ -51,24 +51,25 @@
                 <div class="col-md-6 pb-5">
                     <div class="contact-form">
                         <div id="success"></div>
-                        <form name="sentMessage" id="contactForm" novalidate="novalidate">
+                        <form method="post" name="sentMessage" id="contactForm" novalidate="novalidate" action="{% url 'contact' %}">
+                            {% csrf_token %}
                             <div class="control-group">
-                                <input type="text" class="form-control bg-transparent p-4" id="name" placeholder="Your Name"
+                                <input name="name" type="text" class="form-control bg-transparent p-4" id="name" placeholder="Your Name"
                                     required="required" data-validation-required-message="Please enter your name" />
                                 <p class="help-block text-danger"></p>
                             </div>
                             <div class="control-group">
-                                <input type="email" class="form-control bg-transparent p-4" id="email" placeholder="Your Email"
+                                <input name="email" type="email" class="form-control bg-transparent p-4" id="email" placeholder="Your Email"
                                     required="required" data-validation-required-message="Please enter your email" />
                                 <p class="help-block text-danger"></p>
                             </div>
                             <div class="control-group">
-                                <input type="text" class="form-control bg-transparent p-4" id="subject" placeholder="Subject"
+                                <input name="subject" type="text" class="form-control bg-transparent p-4" id="subject" placeholder="Subject"
                                     required="required" data-validation-required-message="Please enter a subject" />
                                 <p class="help-block text-danger"></p>
                             </div>
                             <div class="control-group">
-                                <textarea class="form-control bg-transparent py-3 px-4" rows="5" id="message" placeholder="Message"
+                                <textarea name="message" class="form-control bg-transparent py-3 px-4" rows="5" id="message" placeholder="Message"
                                     required="required"
                                     data-validation-required-message="Please enter your message"></textarea>
                                 <p class="help-block text-danger"></p>
@@ -80,6 +81,33 @@
                         </form>
                     </div>
                 </div>
+
+                <div class="col-12">
+
+                                {% if messages %}
+                               <ul class="messages">
+                                {% for message in messages %}
+                                <div>
+                                    {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}
+                                        <div class="alert alert-danger d-flex align-items-center" role="alert">
+                                          <div class="{% if message.tags %} alert-{{ message.tags }}{% endif %}" >{{ message | safe }}</div>
+                                        </div>
+                                    {% endif %}
+                                </div>
+
+                                   <div>
+                                       {% if message.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %}
+                                     <div class="alert {% if message.tags %} alert-{{ message.tags }}{% endif %}">{{ message |safe }}</div>
+                                    {% endif %}
+                                   </div>
+
+                                {% endfor %}
+                            </ul>
+                               {% endif %}
+                            </div>
+
+
+
             </div>
         </div>
     </div>
