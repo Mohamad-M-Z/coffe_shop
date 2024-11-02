@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Menu, Category, Contact, Newsletter
+from .models import Menu, Category, Contact, Newsletter, Reservation
 
 # Register your models here.
 
@@ -20,3 +20,4 @@ class ContactAdmin(admin.ModelAdmin):
 
 admin.site.register(Newsletter)
 admin.site.register(Category)
+admin.site.register(Reservation)

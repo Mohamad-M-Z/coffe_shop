@@ -1,8 +1,8 @@
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
-from .models import Menu, Category, Contact
+from .models import Menu, Category, Contact, Reservation
 from django.contrib import messages
-from .form import ContactForm, NewsletterForm
+from .form import ContactForm, NewsletterForm, ReservationForm
 
 
 
@@ -42,7 +42,16 @@ def contact_view(request):
 
 
 def reservation_view(request):
-    return render(request, 'coffe_shop/reservation.html')
+    if request.method == 'POST':
+        form = ReservationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.add_message(request, messages.SUCCESS, "Your message was sent successfully")
+        else:
+            messages.add_message(request, messages.ERROR, 'Your message was not sent! Please try again!')
+
+    form = ReservationForm()
+    return render(request, 'coffe_shop/reservation.html', {"form": form})
 
 
 def testimonial_view(request):

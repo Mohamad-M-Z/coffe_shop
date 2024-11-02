@@ -7,6 +7,7 @@ class Category(models.Model):
     def __str__(self):
         return self.name
 
+
 class Menu(models.Model):
     image = models.ImageField(upload_to='media/menu/', default='menu/menu-1.jpg')
     name = models.CharField(max_length=255)
@@ -39,3 +40,16 @@ class Newsletter(models.Model):
 
     def __str__(self):
         return self.email
+
+
+
+class Reservation(models.Model):
+    name = models.CharField(max_length=255)
+    email = models.EmailField()
+    date = models.DateTimeField(default=False)
+    time = models.TimeField(blank=True)
+
+    def __str__(self):
+        return self.name
+
+
