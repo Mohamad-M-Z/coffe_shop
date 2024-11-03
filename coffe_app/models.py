@@ -48,6 +48,7 @@ class Reservation(models.Model):
     email = models.EmailField()
     date = models.DateTimeField(default=False)
     time = models.TimeField(blank=True)
+    choice_field = models.CharField( max_length=10)
 
     def __str__(self):
         return self.name
